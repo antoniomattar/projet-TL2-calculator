@@ -5,7 +5,7 @@ generic functions to test parsers
 """
 
 import io
-import parser
+import parser_1
 
 PARSER_NAME = None
 PARSER_UNDER_TEST = None
@@ -33,7 +33,7 @@ def test_parsing_error(calc_input):
         result=run(calc_input)
         print("@ unexpected result:", result)
         assert False
-    except parser.Error as e:
+    except parser_1.Error as e:
         print("@ parsing error found:", e)
         pass
     print("@ => OK")

@@ -7,7 +7,7 @@ Calculator in infix syntax - requires Python version >= 3.10
 import sys
 assert sys.version_info >= (3, 10), "Use Python 3.10 or newer !"
 
-from parser import init_parser, parse_token, get_current
+from parser_1 import init_parser, parse_token, get_current
 from tokenDEF import Token
 
 

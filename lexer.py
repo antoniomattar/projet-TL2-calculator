@@ -42,21 +42,25 @@ def parse_digit():
     return value
 
 def parse_NAT():
-    print("@ATTENTION: lexer.parse_NAT à finir !") # LIGNE A SUPPRIMER
+    global current_char
     value = parse_digit()
+    while current_char in tokenDEF.DIGITS:
+        value = 10*value + parse_digit()
     return (Token.NAT, value)
 
 
 # Parse a token (after separators) from the input and returns its token,
 # consumming all symbols from the input corresponding to that token
 def parse_token_after_separators():
-    print("@ATTENTION: lexer.parse_token_after_separators à finir !") # LIGNE A SUPPRIMER
     if current_char in tokenDEF.DIGITS:
         return parse_NAT()
     tok = TOKEN_MAP[current_char]
     match tok:
         case Token.END:
             return (Token.END, None)
+        case Token.CALC:
+            update_current()
+            return (tok, parse_NAT()[1])
         case _: # default case without attribute
             update_current()
             return (tok, None)
