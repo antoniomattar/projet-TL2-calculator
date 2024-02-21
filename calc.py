@@ -9,6 +9,7 @@ assert sys.version_info >= (3, 10), "Use Python 3.10 or newer !"
 
 from parser_1 import init_parser, parse_token, get_current
 from tokenDEF import Token
+from parser_1 import Error
 
 
 ###################
@@ -26,8 +27,8 @@ def parse(stream=sys.stdin):
 def parse_input():
     l = []
     while get_current() != Token.END:
-        parse_token(Token.QUEST)
         n = parse_exp2(l)
+        parse_token(Token.QUEST)
         l.append(n)
     return l
 
@@ -79,6 +80,8 @@ def parse_exp0(l):
             parse_token(Token.MINUS)
             n = parse_exp0(l)
             return -n
+        case _:
+            raise Error('Unexpected token ' + repr(get_current()))
 
 #########################
 ## run on the command-line
