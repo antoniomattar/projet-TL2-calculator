@@ -68,6 +68,8 @@ def parse_exp0(l):
     match get_current():
         case Token.CALC:
             i = parse_token(Token.CALC)
+            if i < 1 or i > len(l):
+                raise Error('Bad index in CALC token, out of range')
             return l[i-1]
         case Token.OPAR:
             parse_token(Token.OPAR)
